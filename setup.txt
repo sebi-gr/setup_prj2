@@ -1,0 +1,32 @@
+cd ~
+mkdir workspace && cd workspace
+curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall
+chmod +x msfinstall 
+sudo ./msfinstall
+msfdb init
+sudo apt install -y autoconf git vim htop net-tools wireshark build-essential libssh2-1-dev libssl-dev python3-pip python3.6-venv rust-all
+git clone https://github.com/nmap/nmap.git
+cd nmap/
+./configure AUTOMAKE='automake-1.15' ACLOCAL='aclocal-1.15' --without-zenmap
+make && sudo make install
+cd ~/workspace
+git clone https://github.com/rofl0r/proxychains-ng.git
+cd proxychains-ng
+./configure
+make && sudo make install
+sudo curl -o /usr/local/share/nmap/scripts/banner-plus.nse https://gist.githubusercontent.com/littleairmada/b04319742c29efe44d5662d842c20e1c/raw/c500449760e7a97f780d0b3627dac37823168a00/banner-plus.nse
+sudo curl -o /usr/local/share/nmap/scripts/elasticsearch.nse https://raw.githubusercontent.com/theMiddleBlue/nmap-elasticsearch-nse/master/elasticsearch.nse
+cd ~/workspace
+sudo python3 -m pip install virtualenv
+git clone https://github.com/TheDreamPort/deep_exploit.git
+cd deep_exploit
+python3 -m venv virtualenv
+source ./virtualenv/bin/activate
+sudo apt install pkg-config
+pip install setuptools-rust==1.1.2 wheel==0.37.1
+pip install -r requirements.txt
+sudo apt install -y nvidia-cuda-toolkit
+sudo cp doc/script/msfrpcd.service /lib/systemd/system
+sudo systemctl daemon-reload
+sudo systemctl enable msfrpcd
+sudo systemctl start msfrpcd.service 
