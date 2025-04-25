@@ -4,7 +4,7 @@ curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/t
 chmod +x msfinstall 
 sudo ./msfinstall
 msfdb init
-sudo apt install -y autoconf git vim htop net-tools wireshark build-essential libssh2-1-dev libssl-dev python3-pip python3.6-venv rust-all
+sudo apt install -y autoconf git vim htop net-tools wireshark build-essential libssh2-1-dev libssl-dev libffi-dev python3-pip python3.6-venv rust-all
 git clone https://github.com/nmap/nmap.git
 cd nmap/
 ./configure AUTOMAKE='automake-1.15' ACLOCAL='aclocal-1.15' --without-zenmap
